@@ -1,0 +1,159 @@
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+
+export default function SignUpScreen() {
+  const [firstName, setFName] = useState("");
+  const [lastName, setLName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
+
+  const handleFNameChange = (e) => {
+    setFName(e.target.value);
+  };
+  const handleLNameChange = (e) => {
+    setLName(e.target.value);
+  };
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+    setEmailError("");
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+    setPasswordError("");
+  };
+
+  const handleConfirmPasswordChange = (e) => {
+    setConfirmPassword(e.target.value);
+    setConfirmPasswordError("");
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Validation checks
+    if (!email) {
+      setEmailError("Email is required");
+      return;
+    }
+
+    if (!/\S+@\S+\.\S+/.test(email)) {
+      setEmailError("Email is invalid");
+      return;
+    }
+
+    if (!password) {
+      setPasswordError("Password is required");
+      return;
+    }
+
+    if (password.length < 6) {
+      setPasswordError("Password must be at least 6 characters");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setConfirmPasswordError("Passwords do not match");
+      return;
+    }
+    // Submit form data to server
+    console.log(firstName, lastName, email, password);
+    fetch("http://localhost:5000/register", {
+      method: "POST",
+      crossDomain: "true",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify({
+        firstName,
+        lastName,
+        email,
+        password,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data, "userRegistered");
+      });
+  };
+
+  return (
+    <div className="container">
+      <div className="row justify-content-center mt-5">
+        <div className="col-md-6">
+          <h2 className="text-center mb-4">Sign Up</h2>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="fname">First Name</label>
+              <input
+                placeholder="John"
+                className="form-control"
+                value={firstName}
+                onChange={handleFNameChange}
+              />
+              <label htmlFor="lname">Last Name</label>
+              <input
+                placeholder="Wick"
+                className="form-control"
+                value={lastName}
+                onChange={handleLNameChange}
+              />
+              <label htmlFor="email">Email address</label>
+              <input
+                type="email"
+                className={`form-control ${emailError ? "is-invalid" : ""}`}
+                id="email"
+                placeholder="Enter email"
+                value={email}
+                onChange={handleEmailChange}
+              />
+              {emailError && (
+                <div className="invalid-feedback">{emailError}</div>
+              )}
+            </div>
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                className={`form-control ${passwordError ? "is-invalid" : ""}`}
+                id="password"
+                placeholder="Password"
+                value={password}
+                onChange={handlePasswordChange}
+              />
+              {passwordError && (
+                <div className="invalid-feedback">{passwordError}</div>
+              )}
+            </div>
+            <div className="form-group">
+              <label htmlFor="confirmPassword">Confirm Password</label>
+              <input
+                type="password"
+                className={`form-control ${
+                  confirmPasswordError ? "is-invalid" : ""
+                }`}
+                id="confirmPassword"
+                placeholder="Confirm Password"
+                value={confirmPassword}
+                onChange={handleConfirmPasswordChange}
+              />
+              {confirmPasswordError && (
+                <div className="invalid-feedback">{confirmPasswordError}</div>
+              )}
+            </div>
+            <button type="submit" className="btn btn-primary w-100 mt-4">
+              Sign Up
+            </button>
+          </form>
+          <Link to="/login">Already have an account? Log in!</Link>
+        </div>
+      </div>
+    </div>
+  );
+}

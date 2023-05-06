@@ -1,0 +1,11 @@
+/* .bg-login {
+  height: 100vh;
+  background-image: url("../assets/bg-login.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+} */
+html {
+  overflow-x: hidden;
+}
