@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../styles/SignUpScreen.css";
 import { Link } from "react-router-dom";
 
 export default function SignUpScreen() {
@@ -84,74 +85,88 @@ export default function SignUpScreen() {
   };
 
   return (
-    <div className="container">
-      <div className="row justify-content-center mt-5">
-        <div className="col-md-6">
-          <h2 className="text-center mb-4">Sign Up</h2>
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="fname">First Name</label>
-              <input
-                placeholder="John"
-                className="form-control"
-                value={firstName}
-                onChange={handleFNameChange}
-              />
-              <label htmlFor="lname">Last Name</label>
-              <input
-                placeholder="Wick"
-                className="form-control"
-                value={lastName}
-                onChange={handleLNameChange}
-              />
-              <label htmlFor="email">Email address</label>
-              <input
-                type="email"
-                className={`form-control ${emailError ? "is-invalid" : ""}`}
-                id="email"
-                placeholder="Enter email"
-                value={email}
-                onChange={handleEmailChange}
-              />
-              {emailError && (
-                <div className="invalid-feedback">{emailError}</div>
-              )}
+    <div className="bg-signup">
+      <div className="container">
+        <div className="row justify-content-center pt-5">
+          <div className="col-md-4">
+            <h2 className="text-center mb-4">Sign Up</h2>
+            <form onSubmit={handleSubmit}>
+              <div className="form-group mb-2">
+                <label htmlFor="fname">First Name</label>
+                <input
+                  placeholder="John"
+                  className="form-control"
+                  value={firstName}
+                  onChange={handleFNameChange}
+                />
+              </div>
+              <div className="form-group mb-2">
+                <label htmlFor="lname">Last Name</label>
+                <input
+                  placeholder="Wick"
+                  className="form-control"
+                  value={lastName}
+                  onChange={handleLNameChange}
+                />
+              </div>
+              <div className="form-group mb-2">
+                <label htmlFor="email">Email address</label>
+                <input
+                  type="email"
+                  className={`form-control ${emailError ? "is-invalid" : ""}`}
+                  id="email"
+                  placeholder="Enter email"
+                  value={email}
+                  onChange={handleEmailChange}
+                />
+                {emailError && (
+                  <div className="invalid-feedback">{emailError}</div>
+                )}
+              </div>
+              <div className="form-group mb-2">
+                <label htmlFor="password">Password</label>
+                <input
+                  type="password"
+                  className={`form-control ${
+                    passwordError ? "is-invalid" : ""
+                  }`}
+                  id="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={handlePasswordChange}
+                />
+                {passwordError && (
+                  <div className="invalid-feedback">{passwordError}</div>
+                )}
+              </div>
+              <div className="form-group mb-2">
+                <label htmlFor="confirmPassword">Confirm Password</label>
+                <input
+                  type="password"
+                  className={`form-control ${
+                    confirmPasswordError ? "is-invalid" : ""
+                  }`}
+                  id="confirmPassword"
+                  placeholder="Confirm Password"
+                  value={confirmPassword}
+                  onChange={handleConfirmPasswordChange}
+                />
+                {confirmPasswordError && (
+                  <div className="invalid-feedback">{confirmPasswordError}</div>
+                )}
+              </div>
+              <div className="d-flex justify-content-center">
+                <button type="submit" className="btn btn-primary mt-4">
+                  Sign Up
+                </button>
+              </div>
+            </form>
+            <div className="d-flex justify-content-end">
+              <Link to="/login">
+                <p className="link-color">Already have an account? Log in!</p>
+              </Link>
             </div>
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                className={`form-control ${passwordError ? "is-invalid" : ""}`}
-                id="password"
-                placeholder="Password"
-                value={password}
-                onChange={handlePasswordChange}
-              />
-              {passwordError && (
-                <div className="invalid-feedback">{passwordError}</div>
-              )}
-            </div>
-            <div className="form-group">
-              <label htmlFor="confirmPassword">Confirm Password</label>
-              <input
-                type="password"
-                className={`form-control ${
-                  confirmPasswordError ? "is-invalid" : ""
-                }`}
-                id="confirmPassword"
-                placeholder="Confirm Password"
-                value={confirmPassword}
-                onChange={handleConfirmPasswordChange}
-              />
-              {confirmPasswordError && (
-                <div className="invalid-feedback">{confirmPasswordError}</div>
-              )}
-            </div>
-            <button type="submit" className="btn btn-primary w-100 mt-4">
-              Sign Up
-            </button>
-          </form>
-          <Link to="/login">Already have an account? Log in!</Link>
+          </div>
         </div>
       </div>
     </div>
