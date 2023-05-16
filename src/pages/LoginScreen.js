@@ -19,7 +19,7 @@ export default function LoginScreen() {
     console.log(email, password);
     // Your code to handle login submission
 
-    fetch("http://localhost:5000/login", {
+    fetch("http://localhost:5000/auth/login", {
       method: "POST",
       crossDomain: "true",
       headers: {

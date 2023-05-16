@@ -7,7 +7,7 @@ export default function HomeScreen() {
     // Define an async function to fetch data from the URL
     const fetchData = async () => {
       // Send a POST request to the URL using fetch
-      const response = await fetch("http://localhost:5000/userDetails", {
+      const response = await fetch("http://localhost:5000/auth/userDetails", {
         method: "POST",
         crossDomain: true,
         headers: {

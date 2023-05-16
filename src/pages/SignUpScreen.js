@@ -63,7 +63,7 @@ export default function SignUpScreen() {
     }
     // Submit form data to server
     console.log(firstName, lastName, email, password);
-    fetch("http://localhost:5000/register", {
+    fetch("http://localhost:5000/auth/signup", {
       method: "POST",
       crossDomain: "true",
       headers: {
@@ -72,14 +72,18 @@ export default function SignUpScreen() {
         "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify({
-        firstName,
-        lastName,
-        email,
-        password,
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password,
       }),
     })
       .then((res) => res.json())
       .then((data) => {
+        if (data.status == "ok") {
+          alert("USER REGISTERD!");
+          window.location.href = "./login";
+        }
         console.log(data, "userRegistered");
       });
   };
