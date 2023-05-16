@@ -1,0 +1,71 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, rgb(255, 0, 179), yellow);
+}
+
+main {
+  width: 400px;
+  height: 450px;
+  background-color: #00000020;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.bg-image {
+  background-image: url("../assets/mole.PNG");
+}
+#header {
+  height: 50px;
+  position: relative;
+}
+#header h1 {
+  font-size: 24px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+#header p {
+  font-size: 14px;
+}
+#left {
+  position: absolute;
+  left: 10px;
+  bottom: 5px;
+}
+#right {
+  position: absolute;
+  right: 10px;
+  bottom: 5px;
+}
+
+#ground {
+  width: 400px;
+  height: 400px;
+  padding: 2px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  grid-gap: 2px;
+  background-color: #00000010;
+  border-radius: 10px;
+}
+#ground > div {
+  background-color: #00000020;
+  border-radius: 10px;
+  transition: all 0.1s ease;
+}
+#ground > div:hover {
+  background-color: #00000040 !important;
+}
