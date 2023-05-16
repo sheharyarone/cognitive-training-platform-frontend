@@ -25,7 +25,7 @@ main {
 }
 
 .bg-image {
-  background-image: url("../assets/mole.PNG");
+  background: url("../assets/mole.PNG") center/cover no-repeat;
 }
 #header {
   height: 50px;
