@@ -36,7 +36,6 @@ export default function SignUpScreen() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     // Validation checks
     if (!email) {
       setEmailError("Email is required");
@@ -64,7 +63,7 @@ export default function SignUpScreen() {
     }
     // Submit form data to server
     console.log(firstName, lastName, email, password);
-    fetch("http://localhost:5000/auth/signup", {
+    fetch("http://localhost:5000/signup", {
       method: "POST",
       crossDomain: "true",
       headers: {
@@ -81,11 +80,12 @@ export default function SignUpScreen() {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.status == "ok") {
+        if (data.status === "ok") {
           alert("USER REGISTERD!");
           window.location.href = "./login";
+        } else {
+          console.log(data, "user Not Registered");
         }
-        console.log(data, "userRegistered");
       });
   };
 

@@ -1,4 +1,6 @@
-
+.contain {
+  background: rgb(86, 3, 3);
+}
 
 .game {
   position: absolute;

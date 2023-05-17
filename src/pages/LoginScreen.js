@@ -17,10 +17,8 @@ export default function LoginScreen() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(email, password);
     // Your code to handle login submission
-
-    fetch("http://localhost:5000/auth/login", {
+    fetch("http://localhost:5000/login", {
       method: "POST",
       crossDomain: "true",
       headers: {
@@ -39,6 +37,7 @@ export default function LoginScreen() {
         if (data.status === "ok") {
           window.localStorage.setItem("token", data.data);
           window.localStorage.setItem("isLoggedIn", "true");
+          window.localStorage.setItem("email", email);
           window.location.href = "./home";
         }
       });

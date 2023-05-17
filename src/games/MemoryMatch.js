@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "../styles/MemoryMatch.css";
 
-export default function Game2() {
+export default function MemoryMatch() {
   const [gameBoard, setGameBoard] = useState([]);
   const [gameStarted, setGameStarted] = useState(false);
+  const [isWin, setWin] = useState(false);
   const [totalFlips, setTotalFlips] = useState(0);
   const [totalTime, setTotalTime] = useState(0);
 
@@ -54,17 +55,46 @@ export default function Game2() {
     }));
 
     setGameBoard(gameBoard);
+    setTotalFlips(0);
+    setTotalTime(0);
+    setWin(false);
   };
 
   useEffect(() => {
-    if (gameStarted) {
+    generateGame();
+    if (gameStarted && !isWin) {
       const interval = setInterval(() => {
         setTotalTime((prevTime) => prevTime + 1);
       }, 1000);
-
       return () => clearInterval(interval);
     }
-  }, [gameStarted]);
+  }, [gameStarted, isWin]);
+
+  const handleGameWon = () => {
+    setWin(true);
+    // Define the game data
+    const gameData = {
+      email: window.localStorage.getItem("email"), // Replace with the actual user identifier
+      totalTime: totalTime,
+      flips: totalFlips,
+    };
+
+    // Send the game data to the API endpoint
+    fetch("http://localhost:5000/memoryGameData", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(gameData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data); // Handle the response data
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
 
   const flipCard = (card) => {
     setTotalFlips((prevFlips) => prevFlips + 1);
@@ -97,6 +127,7 @@ export default function Game2() {
         );
       } else {
         // Unflip cards
+        setTotalFlips((prevValue) => prevValue - 1);
         setGameBoard((prevBoard) =>
           prevBoard.map((prevCard) =>
             prevCard.isFlipped && !prevCard.isMatched
@@ -111,6 +142,8 @@ export default function Game2() {
       gameBoard.filter((prevCard) => !prevCard.isFlipped && !prevCard.isMatched)
         .length === 0
     ) {
+      setGameStarted(false);
+      handleGameWon();
       setTimeout(() => {
         // Game won
         console.log("You won!");
@@ -143,7 +176,14 @@ export default function Game2() {
               </div>
             ))}
           </div>
-          <div className="win">You won!</div>
+          <div className="d-flex justify-content-end">
+            <button
+              className="btn btn-secondary mt-2 align-end"
+              onClick={flipCard}
+            >
+              SUBMIT
+            </button>
+          </div>
         </div>
       </div>
     </div>

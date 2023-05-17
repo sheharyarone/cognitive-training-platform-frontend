@@ -35,16 +35,15 @@ export default function HomeScreen() {
   const navigate = useNavigate();
   const logOut = () => {
     // Remove the token from local storage
-    window.localStorage.removeItem("token");
-    window.localStorage.setItem("isLoggedIn", "false");
+    localStorage.clear();
+
     // Redirect the user to the login page
     navigate("/login");
   };
 
   return (
-
     <div className="mt-5 ">
-      <Navbar/>
+      <Navbar />
       <div>
         <button className="btn btn-secondary float-end me-5" onClick={logOut}>
           LOGOUT
