@@ -36,6 +36,27 @@ export default function WhackAMole() {
       clearInterval(timerRef.current);
       setIsRendering(false);
       setMolePosition(null);
+      // Make API request here
+      fetch("http://localhost:5000/whackaMoleData", {
+        method: "POST",
+        // Add your request headers and body here
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: window.localStorage.getItem("email"),
+          score: score,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // Handle the response data
+          console.log("API response:", data);
+        })
+        .catch((error) => {
+          // Handle any errors
+          console.error("API error:", error);
+        });
     }
   }, [time]);
 

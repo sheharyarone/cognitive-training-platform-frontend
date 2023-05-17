@@ -5,6 +5,7 @@ import SignUpScreen from "./pages/SignUpScreen";
 import HomeScreen from "./pages/HomeScreen";
 import WhackAMole from "./games/WhackAMole";
 import MemoryMatch from "./games/MemoryMatch";
+import StatsScreen from "./pages/StatsScreen";
 
 function App() {
   const isLoggedIn = window.localStorage.getItem("isLoggedIn");
@@ -20,6 +21,7 @@ function App() {
         <Route path="/home" element={<HomeScreen />} />
         <Route path="/whackamole" element={<WhackAMole />} />
         <Route path="/memorymatch" element={<MemoryMatch />} />
+        <Route path="/statsscreen" element={<StatsScreen />} />
       </Routes>
     </BrowserRouter>
   );
