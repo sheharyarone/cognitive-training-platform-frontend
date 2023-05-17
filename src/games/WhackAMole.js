@@ -57,6 +57,7 @@ export default function WhackAMole() {
           // Handle any errors
           console.error("API error:", error);
         });
+      alert("Congratulations! TO VIEW SCORE VISIT PROGRESS SECTION !");
     }
   }, [time]);
 
@@ -101,7 +102,11 @@ export default function WhackAMole() {
             {createBoard()}
           </div>
         ) : (
-          <button onClick={startGame}>Start Game</button>
+          <div className="d-flex justify-content-center align-items-center h-100">
+            <button onClick={startGame} className="px-5 py-2 btn btn-warning">
+              Start
+            </button>
+          </div>
         )}
       </main>
     </div>
