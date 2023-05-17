@@ -1,12 +1,37 @@
 .bg-login {
-  color: white;
+  background: linear-gradient(to right,#0978A6,#FB9447);
+  /* color: white; */
   height: 100vh;
-  background-image: url("../assets/bg-login.jpg");
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
 }
+.contain {
+  display: flex;
+  height: 100vh; /* Adjust the height as needed */
+}
+
+.columnblock {
+  flex: 1;
+}
+
+.left-half {
+  width: 50%;
+  float: left;
+}
+
+.right-half {
+  width: 50%;
+  float: right;
+}
+
+
+.logo {
+  width: 75%; /* Set the width to 50% of the page */
+  display: flex; /* Enable flexbox layout for centering */
+  justify-content: center; /* Horizontally center the SVG within the container */
+  align-items: center; /* Vertically center the SVG within the container */
+  box-sizing: border-box;
+  padding: 10%;
+}
+
 html {
   overflow-x: hidden;
 }

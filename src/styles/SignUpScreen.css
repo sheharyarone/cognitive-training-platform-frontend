@@ -1,11 +1,11 @@
 .bg-signup {
-  color: white;
+  background: linear-gradient(to right,#0978A6,#FB9447);
   height: 100vh;
-  background-image: url("../assets/bg-login.jpg");
+  /* background-image: url("../assets/bg-login.jpg");
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-size: cover;
+  background-size: cover; */
 }
 html {
   overflow-x: hidden;

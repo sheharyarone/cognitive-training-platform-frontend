@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 export default function HomeScreen() {
   const [userData, setUserData] = useState("");
@@ -41,7 +42,9 @@ export default function HomeScreen() {
   };
 
   return (
+
     <div className="mt-5 ">
+      <Navbar/>
       <div>
         <button className="btn btn-secondary float-end me-5" onClick={logOut}>
           LOGOUT

@@ -119,30 +119,32 @@ export default function Game2() {
   };
 
   return (
-    <div className="game">
-      <div className="controls">
-        <button onClick={generateGame}>Start</button>
-        <div className="stats">
-          <div className="moves">{totalFlips} moves</div>
-          <div className="timer">time: {totalTime} sec</div>
+    <div className="contain">
+      <div className="game">
+        <div className="controls">
+          <button onClick={generateGame}>Start</button>
+          <div className="stats">
+            <div className="moves">{totalFlips} moves</div>
+            <div className="timer">time: {totalTime} sec</div>
+          </div>
         </div>
-      </div>
-      <div className="board-container">
-        <div className="board" data-dimension="4">
-          {gameBoard.map((card) => (
-            <div
-              key={card.id}
-              className={`card ${card.isFlipped ? "flipped" : ""}`}
-              onClick={() => flipCard(card)}
-            >
-              <div className="card-front"></div>
-              <div className="card-back">
-                {card.isFlipped ? card.emoji : ""}
+        <div className="board-container">
+          <div className="board" data-dimension="4">
+            {gameBoard.map((card) => (
+              <div
+                key={card.id}
+                className={`card ${card.isFlipped ? "flipped" : ""}`}
+                onClick={() => flipCard(card)}
+              >
+                <div className="card-front"></div>
+                <div className="card-back">
+                  {card.isFlipped ? card.emoji : ""}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+          <div className="win">You won!</div>
         </div>
-        <div className="win">You won!</div>
       </div>
     </div>
   );
