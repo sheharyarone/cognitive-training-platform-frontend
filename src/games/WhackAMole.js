@@ -5,7 +5,6 @@ const WhackAMole = () => {
   const [score, setScore] = useState(0);
   const [time, setTime] = useState(60);
   const [isRendering, setIsRendering] = useState(false);
-  const [startClicked, setStartClicked] = useState(false);
   const [molePosition, setMolePosition] = useState(null);
 
   const timerRef = useRef(null);
@@ -36,7 +35,6 @@ const WhackAMole = () => {
   }, [time]);
 
   const startGame = () => {
-    setStartClicked(true);
     setIsRendering(true);
     setTime(60);
     setScore(0);
