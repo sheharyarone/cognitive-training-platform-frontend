@@ -1,43 +1,46 @@
 import React from "react";
 import { ReactComponent as Logo } from "../assets/isolated-monochrome-white.svg";
-import "../components/Navbar.css";
+import Profile from "../assets/profile.png";
 
 export default function Navbar() {
+  const logOut = () => {
+    // Remove the token from local storage
+    localStorage.clear();
+    window.location.href = "./login";
+  };
   return (
-    <nav class="navbar navbar-expand-lg navbar-dark custom">
-      <div class="container-fluid">
-        <div class="navbar-nav me-auto">
-          <a class="nav-link" href="#">
-            <Logo style={{ width: "300px" }} />
+    <nav className="navbar navbar-expand-lg shadow-lg navbar-dark bg-dark">
+      <div className="container-fluid">
+        <div className="navbar-nav me-auto">
+          <a
+            className="nav-link"
+            onClick={() => (window.location.href = "./home")}
+          >
+            <Logo className="ms-5" style={{ width: "200px" }} />
           </a>
         </div>
-        <div class="navbar-nav dropdown">
+        <div className="navbar-nav dropdown me-5">
           <a
-            class="nav-link dropdown-toggle"
+            className="nav-link dropdown-toggle me-5"
             href="#"
             role="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            Dropdown
+            <img src={Profile} width={"50px"} />
           </a>
-          <ul class="dropdown-menu">
+          <ul className="dropdown-menu">
             <li>
-              <a class="dropdown-item" href="#">
-                Action
+              <a
+                className="dropdown-item"
+                onClick={() => (window.location.href = "./statsscreen")}
+              >
+                Progress
               </a>
             </li>
             <li>
-              <a class="dropdown-item" href="#">
-                Another action
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider" />
-            </li>
-            <li>
-              <a class="dropdown-item" href="#">
-                Something else here
+              <a className="dropdown-item" onClick={logOut}>
+                Log Out
               </a>
             </li>
           </ul>

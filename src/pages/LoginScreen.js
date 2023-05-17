@@ -39,6 +39,8 @@ export default function LoginScreen() {
           window.localStorage.setItem("isLoggedIn", "true");
           window.localStorage.setItem("email", email);
           window.location.href = "./home";
+        } else {
+          alert("can't login! check your credentials and network connection !");
         }
       });
   };

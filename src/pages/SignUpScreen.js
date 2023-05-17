@@ -84,6 +84,7 @@ export default function SignUpScreen() {
           alert("USER REGISTERD!");
           window.location.href = "./login";
         } else {
+          alert("user already registered!");
           console.log(data, "user Not Registered");
         }
       });

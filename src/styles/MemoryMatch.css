@@ -1,5 +1,5 @@
 .contain {
-  background: rgb(86, 3, 3);
+  background: linear-gradient(135deg, #3a4d5d 0%, #c37e3d 50%, #fcc700 100%);
 }
 
 .game {

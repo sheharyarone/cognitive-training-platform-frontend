@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "../styles/WhackAMole.css";
+import Navbar from "../components/Navbar";
 
 export default function WhackAMole() {
   const [score, setScore] = useState(0);
@@ -86,29 +87,32 @@ export default function WhackAMole() {
   };
 
   return (
-    <div className="flex">
-      <main>
-        <div id="header" className="flex">
-          <h1>Whack A Mole!</h1>
-          <p id="left">
-            Score: <span id="score">{score}</span>
-          </p>
-          <p id="right">
-            Time: <span id="time">{time}</span>s
-          </p>
-        </div>
-        {isRendering ? (
-          <div id="ground" className="grid">
-            {createBoard()}
+    <div>
+      <Navbar />
+      <div className="flex">
+        <main>
+          <div id="header" className="flex">
+            <h1>Whack A Mole!</h1>
+            <p id="left">
+              Score: <span id="score">{score}</span>
+            </p>
+            <p id="right">
+              Time: <span id="time">{time}</span>s
+            </p>
           </div>
-        ) : (
-          <div className="d-flex justify-content-center align-items-center h-100">
-            <button onClick={startGame} className="px-5 py-2 btn btn-warning">
-              Start
-            </button>
-          </div>
-        )}
-      </main>
+          {isRendering ? (
+            <div id="ground" className="grid">
+              {createBoard()}
+            </div>
+          ) : (
+            <div className="d-flex justify-content-center align-items-center h-100">
+              <button onClick={startGame} className="px-5 py-2 btn btn-warning">
+                Start
+              </button>
+            </div>
+          )}
+        </main>
+      </div>
     </div>
   );
 }

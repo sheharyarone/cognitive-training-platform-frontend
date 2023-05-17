@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Navbar from "../components/Navbar";
 import "../styles/MemoryMatch.css";
 
 export default function MemoryMatch() {
@@ -43,7 +44,7 @@ export default function MemoryMatch() {
       throw new Error("The dimension of the board must be an even number.");
     }
 
-    const emojis = ["🥔", "🍒", "🥑", "🌽", "🥕", "🍇", "🍉", "🍌", "🥭", "🍍"];
+    const emojis = ["🚒", "🚙", "🚡", "🚘", "🚗", "🚔", "🚃", "🚋", "🏎️", "🚓"];
     const picks = pickRandom(emojis, (dimensions * dimensions) / 2);
     const items = shuffle([...picks, ...picks]);
 
@@ -146,43 +147,46 @@ export default function MemoryMatch() {
       handleGameWon();
       setTimeout(() => {
         // Game won
-        console.log("You won!");
+        alert("You won! See your stats on Progress Page");
       }, 1000);
     }
   };
 
   return (
-    <div className="contain">
-      <div className="game">
-        <div className="controls">
-          <button onClick={generateGame}>Start</button>
-          <div className="stats">
-            <div className="moves">{totalFlips} moves</div>
-            <div className="timer">time: {totalTime} sec</div>
+    <div>
+      <Navbar />
+      <div className="contain">
+        <div className="game">
+          <h3>PRESS ON ANY CARD TO START THE GAME</h3>
+          <div className="controls d-flex justify-content-center">
+            <div className="stats ">
+              <div className="moves">{totalFlips} moves</div>
+              <div className="timer">time: {totalTime} sec</div>
+            </div>
           </div>
-        </div>
-        <div className="board-container">
-          <div className="board" data-dimension="4">
-            {gameBoard.map((card) => (
-              <div
-                key={card.id}
-                className={`card ${card.isFlipped ? "flipped" : ""}`}
-                onClick={() => flipCard(card)}
-              >
-                <div className="card-front"></div>
-                <div className="card-back">
-                  {card.isFlipped ? card.emoji : ""}
+          <div className="board-container">
+            <div className="board" data-dimension="4">
+              {gameBoard.map((card) => (
+                <div
+                  key={card.id}
+                  className={`card ${card.isFlipped ? "flipped" : ""}`}
+                  onClick={() => flipCard(card)}
+                >
+                  <div className="card-front"></div>
+                  <div className="card-back">
+                    {card.isFlipped ? card.emoji : ""}
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-          <div className="d-flex justify-content-end">
-            <button
-              className="btn btn-secondary mt-2 align-end"
-              onClick={flipCard}
-            >
-              SUBMIT
-            </button>
+              ))}
+            </div>
+            <div className="d-flex justify-content-end">
+              <button
+                className="btn btn-secondary mt-2 align-end"
+                onClick={flipCard}
+              >
+                SUBMIT
+              </button>
+            </div>
           </div>
         </div>
       </div>

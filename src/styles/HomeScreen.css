@@ -1,0 +1,12 @@
+.bg-home{
+    background: linear-gradient(to right,#0978A6,#FB9447);
+    height: 100vh;
+}
+
+.black-to-white {
+    filter: brightness(1000%) invert(100%);
+  }
+
+.colorprimary{
+    background-color: #3d3c3d;
+}
