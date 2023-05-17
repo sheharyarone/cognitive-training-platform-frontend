@@ -1,47 +1,64 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "../styles/WhackAMole.css";
 
-const WhackAMole = (props) => {
+const WhackAMole = () => {
   const [score, setScore] = useState(0);
   const [time, setTime] = useState(60);
-  const [isRendering, setIsRendering] = useState(true);
+  const [isRendering, setIsRendering] = useState(false);
+  const [startClicked, setStartClicked] = useState(false);
+  const [molePosition, setMolePosition] = useState(null);
 
-  const handleClick = (event) => {
-    const classNames = event.target.className;
-    console.log(classNames);
-    if (classNames === "place bg-image") {
+  const timerRef = useRef(null);
+
+  const handleClick = () => {
+    if (molePosition !== null) {
       setScore((prevScore) => prevScore + 1);
-    } else {
-      setScore((prevScore) => prevScore - 1);
+      setMolePosition(getRandomPosition());
     }
   };
 
   useEffect(() => {
-    const timer = setInterval(() => {
+    timerRef.current = setInterval(() => {
       setTime((prevTime) => prevTime - 1);
     }, 1000);
 
-    if (time == 0) {
-      clearInterval(timer);
-      setIsRendering(false);
-    }
+    return () => {
+      clearInterval(timerRef.current);
+    };
   }, []);
 
+  useEffect(() => {
+    if (time === 0) {
+      clearInterval(timerRef.current);
+      setIsRendering(false);
+      setMolePosition(null);
+    }
+  }, [time]);
+
+  const startGame = () => {
+    setStartClicked(true);
+    setIsRendering(true);
+    setTime(60);
+    setScore(0);
+    setMolePosition(getRandomPosition());
+  };
+
+  const getRandomPosition = () => {
+    const randomIndex = Math.floor(Math.random() * 16);
+    return randomIndex;
+  };
+
   const createBoard = () => {
-    const places = [];
-    const id = Math.floor(Math.random() * 16);
+    const board = [];
     for (let i = 0; i < 16; i++) {
-      const className = i === id ? "place bg-image" : "place";
-      places.push(
+      const isMole = i === molePosition;
+      const className = isMole ? "place bg-image" : "place";
+      board.push(
         <div key={i} onClick={handleClick} className={className}></div>
       );
     }
-    return places;
+    return board;
   };
-
-  if (!isRendering) {
-    return null;
-  }
 
   return (
     <div className="flex">
@@ -55,7 +72,13 @@ const WhackAMole = (props) => {
             Time: <span id="time">{time}</span>s
           </p>
         </div>
-        <div id="ground">{createBoard()}</div>
+        {isRendering ? (
+          <div id="ground" className="grid">
+            {createBoard()}
+          </div>
+        ) : (
+          <button onClick={startGame}>Start Game</button>
+        )}
       </main>
     </div>
   );
