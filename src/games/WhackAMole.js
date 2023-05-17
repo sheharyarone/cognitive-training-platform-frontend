@@ -1,30 +1,35 @@
 import React, { useState, useEffect, useRef } from "react";
 import "../styles/WhackAMole.css";
 
-const WhackAMole = () => {
+export default function WhackAMole() {
   const [score, setScore] = useState(0);
-  const [time, setTime] = useState(60);
+  const [time, setTime] = useState(30);
   const [isRendering, setIsRendering] = useState(false);
   const [molePosition, setMolePosition] = useState(null);
 
   const timerRef = useRef(null);
 
-  const handleClick = () => {
-    if (molePosition !== null) {
+  const handleClick = (event) => {
+    const classNames = event.target.className;
+    if (classNames === "place bg-image") {
       setScore((prevScore) => prevScore + 1);
-      setMolePosition(getRandomPosition());
+    } else {
+      setScore((prevScore) => prevScore - 1);
     }
+    setMolePosition(getRandomPosition());
   };
 
   useEffect(() => {
-    timerRef.current = setInterval(() => {
-      setTime((prevTime) => prevTime - 1);
-    }, 1000);
+    if (isRendering) {
+      timerRef.current = setInterval(() => {
+        setTime((prevTime) => prevTime - 1);
+      }, 1000);
+    }
 
     return () => {
       clearInterval(timerRef.current);
     };
-  }, []);
+  }, [isRendering]);
 
   useEffect(() => {
     if (time === 0) {
@@ -36,7 +41,7 @@ const WhackAMole = () => {
 
   const startGame = () => {
     setIsRendering(true);
-    setTime(60);
+    setTime(30);
     setScore(0);
     setMolePosition(getRandomPosition());
   };
@@ -80,6 +85,4 @@ const WhackAMole = () => {
       </main>
     </div>
   );
-};
-
-export default WhackAMole;
+}
